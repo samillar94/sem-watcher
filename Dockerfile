@@ -1,17 +1,19 @@
-FROM ubuntu:18.04
+FROM python:3.8-slim
 
-RUN apt-get update -y && apt-get install -y python3 python3-pip
+ENV FLASK_ENV=production
 
 COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 COPY ./src /app
 
 EXPOSE 80
 
-ENTRYPOINT ["python3"]
+# Run both scripts using supervisord
+RUN apt-get update && apt-get install -y supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-CMD ["app.py"]
+CMD ["supervisord", "-n"]
