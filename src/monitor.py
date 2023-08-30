@@ -148,7 +148,7 @@ def monitor():
             now = datetime.datetime.now()
 
             testObj = {
-                "date/time": now,
+                "datetime": now,
                 "tests": results
             }
 

@@ -1,6 +1,4 @@
-from flask import Flask
-from flask import send_file
-from flask import Response
+from flask import Flask, send_file, Response, request
 import json
 import datetime
 import subprocess
@@ -53,25 +51,32 @@ def downloadLog():
 
 @app.route('/delete')
 def deleteFile():
+    passkey = request.args.get('passkey')
+    if passkey == 'strong':
+        now = datetime.datetime.now()
 
-    now = datetime.datetime.now()
+        initObj = [{
+            "log init date/time": now
+        }]
 
-    initObj = [{
-        "log init date/time": now
-    }]
+        j = json.dumps(initObj, indent=4, sort_keys=True, default=str)
 
-    j = json.dumps(initObj, indent=4, sort_keys=True, default=str)
+        with open(logpath, 'w') as outfile:
+            outfile.write(j)
 
-    with open(logpath, 'w') as outfile:
-        outfile.write(j)
-
-    return respond(json.dumps({"message": "Log reset"}), 200)
+        return respond(json.dumps({"message": "Log reset"}), 200)
+    else:
+        return respond(json.dumps({"message": "Unauthorised"}), 404)
 
 
 @app.route('/refresh')
 def restartMonitor():
-    subprocess.run(['supervisorctl','restart','monitor_script'])
-    return respond(json.dumps({"message": "Monitor restarted - new results available shortly"}), 200)
+    passkey = request.args.get('passkey')
+    if passkey == 'strong':
+        subprocess.run(['supervisorctl','restart','monitor_script'])
+        return respond(json.dumps({"message": "Monitor restarted - new results available shortly"}), 200)
+    else:
+        return respond(json.dumps({"message": "Unauthorised"}), 404)
 
 
 ## PROGRAM
