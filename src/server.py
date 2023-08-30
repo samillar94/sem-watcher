@@ -41,7 +41,7 @@ def report():
     try:
         with open(logpath, 'r') as logfile:
             log = json.load(logfile)
-            return respond(json.dumps(log), 200)
+            return respond(json.dumps(log[-1]), 200)
     except:
         return respond('\{"message": "Couldn\'t load log path '+logpath+'"}', 400)
 
@@ -70,7 +70,7 @@ def deleteFile():
 
 @app.route('/refresh')
 def restartMonitor():
-    subprocess.run('supervisorct1','restart','monitor_script')
+    subprocess.run(['supervisorctl','restart','monitor_script'])
     return respond(json.dumps({"message": "Monitor restarted - new results available shortly"}), 200)
 
 
