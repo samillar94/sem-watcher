@@ -3,6 +3,7 @@ from flask import send_file
 from flask import Response
 import json
 import datetime
+import subprocess
 
 
 ## FLASK APP
@@ -67,6 +68,13 @@ def deleteFile():
     return respond(json.dumps({"message": "Log reset"}), 200)
 
 
+@app.route('/refresh')
+def restartMonitor():
+    subprocess.run('supervisorct1','restart','monitor_script')
+    return respond(json.dumps({"message": "Monitor restarted - new results available shortly"}), 200)
+
+
+## PROGRAM
 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0", port=80, debug=True)

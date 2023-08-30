@@ -1,25 +1,111 @@
 [{"message": "Log file continued from original. Note Docker will use UTC for the timestamps but the initial ones here from the original WSL environment show BST."},
 {
-    "date/time": "2023-08-28 13:07:23.232363",
-    "tests": [
-        "maxmin-validCase-working: False",
-        "score-validCase-working: True",
-        "risk-validCase-working: False"
-    ]
-},
-{
-    "date/time": "2023-08-28 13:17:19.518290",
-    "tests": [
-        "maxmin-validCase-working: False",
-        "score-validCase-working: True",
-        "risk-validCase-working: False"
-    ]
-},
-{
-    "date/time": "2023-08-28 13:22:23.989595",
-    "tests": [
-        "maxmin-validCase-working: False",
-        "score-validCase-working: True",
-        "risk-validCase-working: False"
-    ]
+    "date/time": "2023-08-30 14:14:40.959991",
+    "tests": {
+        "maxmin": {
+            "valid1": {
+                "latency": 0.136251,
+                "notes": [
+                    "Endpoint: http://sem-proxy.40103709.qpc.hal.davecutting.uk/?service=maxmin&a1=5&a2=6&a3=7&a4=8&c=70",
+                    "Response: {'error': False, 'data': {'max_attendances': [{'item': 'Canvas activities', 'attendance': 8, 'unit': 'hours'}], 'min_attendances': [{'item': 'Lecture sessions', 'attendance': 5, 'unit': 'hours'}]}, 'lines': ['Maximum attendance:', '- Canvas activities: 8 hours', 'Minimum attendance:', '- Lecture sessions: 5 hours']}"
+                ],
+                "passed": true,
+                "responding": true,
+                "working": true
+            }
+        },
+        "percents": {
+            "valid1": {
+                "latency": 0.119781,
+                "notes": [
+                    "Endpoint: http://sem-proxy.40103709.qpc.hal.davecutting.uk/?service=percents&a1=5&a2=6&a3=7&a4=8&c=70",
+                    "Response: {'error': False, 'data': {'percents': [15.151515151515152, 27.272727272727273, 15.909090909090908, 14.545454545454545]}, 'lines': ['Lecture sessions: 15% attendance', 'Lab sessions: 27% attendance', 'Support sessions: 16% attendance', 'Canvas activities: 15% attendance']}",
+                    "Error: Expected line not found in results"
+                ],
+                "passed": true,
+                "responding": true,
+                "working": true
+            }
+        },
+        "risk": {
+            "invalid1": {
+                "latency": 0.074085,
+                "notes": [
+                    "Endpoint: http://sem-proxy.40103709.qpc.hal.davecutting.uk/?service=risk&a1=5555&a2=6&a3=7&a4=8&c=70",
+                    "Response: {'Proxy error': {}}",
+                    "Error: Bad response from the service"
+                ],
+                "passed": false,
+                "responding": false,
+                "working": false
+            },
+            "valid1": {
+                "latency": 0.173753,
+                "notes": [
+                    "Endpoint: http://sem-proxy.40103709.qpc.hal.davecutting.uk/?service=risk&a1=5&a2=6&a3=7&a4=8&c=70",
+                    "Response: {'error': False, 'data': {'risky': True}, 'lines': ['Engagement score below cutoff - high risk of failure']}"
+                ],
+                "passed": true,
+                "responding": true,
+                "working": true
+            },
+            "valid2": {
+                "latency": 0.158879,
+                "notes": [
+                    "Endpoint: http://sem-proxy.40103709.qpc.hal.davecutting.uk/?service=risk&a1=5&a2=22&a3=44&a4=38&c=70",
+                    "Response: {'error': False, 'data': {'risky': True}, 'lines': ['Engagement score below cutoff - high risk of failure']}"
+                ],
+                "passed": true,
+                "responding": true,
+                "working": true
+            },
+            "valid3": {
+                "latency": 0.151976,
+                "notes": [
+                    "Endpoint: http://sem-proxy.40103709.qpc.hal.davecutting.uk/?service=risk&a1=5&a2=22&a3=44&a4=39&c=70",
+                    "Response: {'error': False, 'data': {'risky': False}, 'lines': ['Engagement score at or above cutoff - low risk of failure']}",
+                    "Error: Result item False did not match expected False"
+                ],
+                "passed": false,
+                "responding": true,
+                "working": true
+            }
+        },
+        "score": {
+            "valid1": {
+                "latency": 0.098241,
+                "notes": [
+                    "Endpoint: http://sem-proxy.40103709.qpc.hal.davecutting.uk/?service=score&a1=5&a2=6&a3=7&a4=8&c=70",
+                    "Response: {'error': False, 'data': {'score': 0.20022727272727275}, 'lines': ['Engagement Score: 20%']}"
+                ],
+                "passed": true,
+                "responding": true,
+                "working": true
+            }
+        },
+        "sort": {
+            "valid1": {
+                "latency": 0.240574,
+                "notes": [
+                    "Endpoint: http://sem-proxy.40103709.qpc.hal.davecutting.uk/?service=sort&a1=5&a2=6&a3=7&a4=8&c=70",
+                    "Response: {'error': False, 'data': {'sorted_attendances': [{'item': 'Canvas activities', 'attendance': 8, 'unit': 'hours'}, {'item': 'Support sessions', 'attendance': 7, 'unit': 'hours'}, {'item': 'Lab sessions', 'attendance': 6, 'unit': 'hours'}, {'item': 'Lecture sessions', 'attendance': 5, 'unit': 'hours'}]}, 'lines': ['Canvas activities: 8 hours', 'Support sessions: 7 hours', 'Lab sessions: 6 hours', 'Lecture sessions: 5 hours']}"
+                ],
+                "passed": true,
+                "responding": true,
+                "working": true
+            }
+        },
+        "total": {
+            "valid1": {
+                "latency": 0.076067,
+                "notes": [
+                    "Endpoint: http://sem-proxy.40103709.qpc.hal.davecutting.uk/?service=total&a1=5&a2=6&a3=7&a4=8&c=70",
+                    "Response: {'error': False, 'data': {'total': 26, 'totalAvailable': 154}, 'lines': ['Total of 26 hours attended, of 154 available']}"
+                ],
+                "passed": true,
+                "responding": true,
+                "working": true
+            }
+        }
+    }
 }]
