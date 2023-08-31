@@ -220,7 +220,7 @@ def test(service):
                     if key in r:
                         if key == "data":
                             for datakey, datavalue in value.items():
-                                if r["data"][datakey] and r["data"][datakey] == datavalue:
+                                if datakey in r["data"] and (r["data"][datakey] == datavalue):
                                     print("Result item matched expected: "+str(datavalue))
                                     passed = True
                                 else:
@@ -234,7 +234,7 @@ def test(service):
                                     raise Exception("Expected line not found in results")
                         elif key == "error":
                             if r["error"] == value:
-                                print("Error returned as expected")
+                                print("Error status as expected")
                                 passed = True
                             else:
                                 raise Exception("Query should have thrown an error but didn't")
