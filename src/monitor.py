@@ -115,11 +115,75 @@ testCases = {
             "c": 70
         },
         "expected": {
+            "score": {
+                "error": True
+            },
             "risk": {
                 "error": True
-            }
+            },
+            "percents": {
+                "error": True
+            },
         }
-    }
+    },
+    "invalid2": {
+        "inputs": {
+            "a1": 5,
+            "a2": -6,
+            "a3": 7,
+            "a4": 8,
+            "c": 70
+        },
+        "expected": {
+            "maxmin": {
+                "error": True
+            },
+            "sort": {
+                "error": True
+            },
+            "total": {
+                "error": True
+            },
+            "score": {
+                "error": True
+            },
+            "risk": {
+                "error": True
+            },
+            "percents": {
+                "error": True
+            },
+        }
+    },
+    "invalid3": {
+        "inputs": {
+            "a1": 5,
+            "a2": 6,
+            "a3": "seven",
+            "a4": 8,
+            "c": 70
+        },
+        "expected": {
+            "maxmin": {
+                "error": True
+            },
+            "sort": {
+                "error": True
+            },
+            "total": {
+                "error": True
+            },
+            "score": {
+                "error": True
+            },
+            "risk": {
+                "error": True
+            },
+            "percents": {
+                "error": True
+            },
+        }
+    },
 }
 
 logfilename = 'log.json'
